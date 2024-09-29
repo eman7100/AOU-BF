@@ -1,29 +1,20 @@
-# Use a base image with Python
-FROM python:3.8-slim
+# Use the official Python image as a base image
+FROM python:3.9-slim
 
-# Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements.txt file first to leverage Docker caching
+# Copy the requirements file to the container
 COPY requirements.txt .
 
-# Install virtualenv package
-RUN pip install virtualenv
+# Install the required packages
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Create a virtual environment inside the container
-RUN virtualenv venv
-
-# Upgrade pip inside the virtual environment
-RUN source venv/bin/activate && pip install --upgrade pip
-
-# Install the necessary dependencies inside the virtual environment
-RUN source venv/bin/activate && pip install -r requirements.txt
-
-# Copy all the project files into the container
+# Copy the rest of your application code to the container
 COPY . .
 
-# Expose port 8000 for the application (assuming your app runs on port 8000)
+# Expose the port your app runs on
 EXPOSE 8000
 
-# Command to run the application within the virtual environment
-CMD ["sh", "-c", "source venv/bin/activate && python app.py"]
+# Specify the command to run your application
+CMD ["python", "main.py"]
