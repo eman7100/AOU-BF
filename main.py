@@ -5,7 +5,7 @@ import openai
 from openai import OpenAI
 
 # Set your OpenAI API key and the Assistant ID you want to use
-OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
+OPENAI_API_KEY = "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"
 ASSISTANT_ID = "asst_90WTwI83NI6qrLLNvqeSSJ7H" 
 app = Flask(__name__)
 client = OpenAI(api_key=OPENAI_API_KEY)
